@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, IBullet
+public class Bullet : MonoBehaviour, IBullet, IPauseHandler
 {
     [SerializeField] protected float speed = 10f;
     [SerializeField] protected Rigidbody rb;
@@ -14,6 +15,13 @@ public class Bullet : MonoBehaviour, IBullet
 
     [HideInInspector] public string parentTag;
 
+    Vector3 tmpVelocity;
+
+    private void Start()
+    {
+        GameManager.Instance.PauseManager.Subscribe(this);
+    }
+
     public void Launch(Vector3 position, Quaternion rotation, string parentTag)
     {
         transform.position = position;
@@ -21,7 +29,18 @@ public class Bullet : MonoBehaviour, IBullet
         this.parentTag = parentTag;
 
         rb.velocity = transform.forward * speed;
-        StartCoroutine(LifeTime());
+        tmpVelocity = rb.velocity;
+
+        LifeTime();
+        
+    }
+
+    private void LifeTime()
+    {
+        StartCoroutine(GameManager.WaitAndAction(
+            lifeTime,
+            () => GameManager.Instance.poolDictionary[objectTag].Release(gameObject)
+            ));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,10 +54,8 @@ public class Bullet : MonoBehaviour, IBullet
         }
     }
 
-    private IEnumerator LifeTime()
+    public void SetPaused(bool isPaused)
     {
-        yield return new WaitForSeconds(lifeTime);
-        GameManager.Instance.poolDictionary[objectTag].Release(gameObject);
-        yield break;
+        rb.velocity = isPaused ? Vector3.zero : tmpVelocity;
     }
 }

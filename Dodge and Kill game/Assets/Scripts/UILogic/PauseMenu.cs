@@ -8,17 +8,11 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool IsGamePaused { get; private set; }
 
-    public static event EventHandler OnPause;
-    public static event EventHandler OnResume;
-
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] Animator animator;
 
-    float oldTimeScale;
-
     private void Start()
     {
-        oldTimeScale = Time.timeScale;
         Resume();
     }
 
@@ -36,19 +30,15 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         IsGamePaused = true;
-        OnPause?.Invoke(this, EventArgs.Empty);
-
+        GameManager.Instance.PauseManager.SetPaused(IsGamePaused);
         pauseMenuUI.SetActive(true);
-        oldTimeScale = Time.timeScale;
-        Time.timeScale = 0;
     }
 
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = oldTimeScale;
         IsGamePaused = false;
-        OnResume?.Invoke(this, EventArgs.Empty);
+        GameManager.Instance.PauseManager.SetPaused(IsGamePaused);
     }
 
     public void MainMenu()
@@ -58,8 +48,8 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.PauseManager.SetPaused(false);
     }
 
     public void Quit()

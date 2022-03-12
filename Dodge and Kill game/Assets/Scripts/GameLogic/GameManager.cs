@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
     public Dictionary<PooledObjectTag, ObjectPool<GameObject>> poolDictionary;
     public Dictionary<DamageType, Material> damageMaterialsDictionary;
 
+
+    public PauseManager PauseManager { get; private set; }
+
+    public bool IsPaused => PauseManager.IsPaused;
+
     public static GameManager Instance { get => instance; private set => instance = value; }
 
     private void Awake()
@@ -26,6 +31,7 @@ public class GameManager : MonoBehaviour
         InitPools();
         InitDamageMaterials();
 
+        PauseManager = new PauseManager();
     }
 
     void InitPools()
@@ -79,5 +85,20 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         value(endValue);
+    }
+
+    public static IEnumerator WaitAndAction(float waitTime, Action actionAfter, Action actionEveryTick = null)
+    {
+        float time = 0;
+        while (time < waitTime)
+        {
+            if (!GameManager.Instance.PauseManager.IsPaused)
+            {
+                time += Time.deltaTime;
+                actionEveryTick?.Invoke();
+            }
+            yield return null;
+        }
+        actionAfter();
     }
 }

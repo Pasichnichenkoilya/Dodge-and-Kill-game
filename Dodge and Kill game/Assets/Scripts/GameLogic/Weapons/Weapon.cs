@@ -6,10 +6,12 @@ public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] protected float shootingCoolDown; // = 0.5f
     [HideInInspector] public string parentTag;
-    protected bool readyForShoot;
+    protected bool readyForShoot = true;
 
     protected Vector3 direction;
     protected Quaternion rotationGoal;
+
+    bool IsPaused => GameManager.Instance.PauseManager.IsPaused;
 
     private void Start()
     {
@@ -19,8 +21,7 @@ public abstract class Weapon : MonoBehaviour
     public virtual void Shoot()
     {
         if (!readyForShoot) return;
-
-        StartCoroutine(ShootCoolDown());
+        ShootCoolDown();
     }
 
     public void RotateToTarget(Vector3 targetPosition, float turnSpeed = -1)
@@ -37,11 +38,9 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    protected IEnumerator ShootCoolDown()
+    protected void ShootCoolDown()
     {
         readyForShoot = false;
-        yield return new WaitForSeconds(shootingCoolDown);
-        readyForShoot = true;
-        yield break;
+        StartCoroutine(GameManager.WaitAndAction(shootingCoolDown, () => readyForShoot = true));
     }
 }

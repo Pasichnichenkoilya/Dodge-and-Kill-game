@@ -3,7 +3,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPauseHandler
 {
     public float speed = 5f;
     
@@ -14,8 +14,12 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public Vector3 moveDelta;
 
+    Vector3 tmpVelocity;
+
     private void Start()
     {
+        GameManager.Instance.PauseManager.Subscribe(this);
+
         moveDelta = new Vector3();
 
         if (weapon != null)
@@ -55,6 +59,12 @@ public class Player : MonoBehaviour
         moveDelta.x = Input.GetAxisRaw("Horizontal");
 
         rb.velocity = moveDelta.normalized * speed;
+        tmpVelocity = rb.velocity;
+    }
+
+    public void SetPaused(bool isPaused)
+    {
+        rb.velocity = isPaused ? Vector3.zero : tmpVelocity;
     }
     #endregion
 

@@ -45,18 +45,15 @@ public class Dash : Perk
 
         StartCoroutine(GameManager.ChangeValueSmoothly(res => player.speed = res, player.speed, player.speed - dashForce, duration)); // change speed back to normal smoothly
         isDashing = false;
-        StartCoroutine(DashCoolDown());
+        DashCoolDown();
 
         yield break;
     }
 
-    private IEnumerator DashCoolDown()
+    private void DashCoolDown()
     {
         StartCoroutine(GameManager.ChangeValueSmoothly(result => dash = result, dash, maxDash, baseCoolDown));
-        yield return new WaitForSeconds(baseCoolDown);
-        readyForDash = true;
-
-        yield break;
+        StartCoroutine(GameManager.WaitAndAction(baseCoolDown, () => readyForDash = true));
     }
 
 }

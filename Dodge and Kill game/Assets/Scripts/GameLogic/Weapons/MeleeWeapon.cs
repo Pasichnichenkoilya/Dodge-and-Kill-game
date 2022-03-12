@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeWeapon : Weapon
+public class MeleeWeapon : Weapon, IPauseHandler
 {
     [SerializeField] Transform shootFrom;
     [SerializeField] float attackRange;
@@ -12,11 +12,19 @@ public class MeleeWeapon : Weapon
 
     [SerializeField] Animator animator;
 
+    float prevSpeed;
+
+    private void Start()
+    {
+        GameManager.Instance.PauseManager.Subscribe(this);
+        prevSpeed = animator.speed;
+    }
+
     public override void Shoot()
     {
-        if (!readyForShoot)
-            return;
+        if (!readyForShoot) return;
 
+        Debug.Log("Shoot spear");
         animator.SetTrigger("Attack");
 
         base.Shoot();
@@ -33,11 +41,29 @@ public class MeleeWeapon : Weapon
                 healthObj.TakeDamage(damageType, specialDamage);
             }
         }
+        Debug.Log("ApplyDamage");
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(shootFrom.position, attackRange);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.PauseManager.Unsubscribe(this);
+    }
+
+    public void SetPaused(bool isPaused)
+    {
+        if (isPaused)
+        {
+            animator.speed = 0;
+        }
+        else
+        {
+            animator.speed = prevSpeed;
+        }
     }
 }

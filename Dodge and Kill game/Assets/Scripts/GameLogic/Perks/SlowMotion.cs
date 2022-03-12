@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowMotion : Perk
+public class SlowMotion : Perk, IPauseHandler
 {
     [Range(1f, .1f)]
     [SerializeField] float slowDownFactor;
@@ -19,8 +19,10 @@ public class SlowMotion : Perk
     private void Start()
     {
         actionProgress = maxValue;
-        PauseMenu.OnPause += PauseMenu_OnPause;
-        PauseMenu.OnResume += PauseMenu_OnResume;
+        //PauseMenu.OnPause += PauseMenu_OnPause;
+        //PauseMenu.OnResume += PauseMenu_OnResume;
+
+        GameManager.Instance.PauseManager.Subscribe(this);
     }
 
     private void PauseMenu_OnResume(object sender, EventArgs e)
@@ -97,5 +99,17 @@ public class SlowMotion : Perk
         yield return new WaitForSeconds(actualCoolDown);
 
         yield break;
+    }
+
+    public void SetPaused(bool isPaused)
+    {
+        if (isPaused)
+        {
+            StopAllCoroutines();
+        }
+        else
+        {
+            StartCoroutine(SlowMotionCoolDown());
+        }
     }
 }

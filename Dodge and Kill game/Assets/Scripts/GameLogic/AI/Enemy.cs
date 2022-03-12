@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPauseHandler
 {
     [SerializeField] protected Transform target;
     [SerializeField] protected float turnSpeed = 0.015f;
@@ -16,9 +16,12 @@ public class Enemy : MonoBehaviour
 
     Quaternion rotationGoal;
     Vector3 direction;
+    Vector3 tmpVelocity;
 
     private void Start()
     {
+        GameManager.Instance.PauseManager.Subscribe(this);
+
         if (weapon != null)
             weapon.parentTag = gameObject.tag.ToString();
     }
@@ -48,6 +51,7 @@ public class Enemy : MonoBehaviour
     protected void Move()
     {
         rb.velocity = transform.forward * movingSpeed;
+        tmpVelocity = rb.velocity;
     }
 
     protected void LookOnPlayer()
@@ -59,5 +63,10 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotationGoal, turnSpeed);
 
         weapon?.RotateToTarget(target.position, turnSpeed);
+    }
+
+    public void SetPaused(bool isPaused)
+    {
+        rb.velocity = isPaused ? Vector3.zero : tmpVelocity;
     }
 }
