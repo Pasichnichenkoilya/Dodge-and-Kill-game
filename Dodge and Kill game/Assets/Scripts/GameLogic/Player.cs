@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, IPauseHandler
 {
     public float speed = 5f;
-    
+
     public Rigidbody rb;
     public Weapon weapon;
     public Perk perk;

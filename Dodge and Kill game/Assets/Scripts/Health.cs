@@ -68,7 +68,6 @@ public class Health : MonoBehaviour
         isTakingSpecialDamage = true;
 
         healthBar.SetImageColor(GameManager.Instance.damageMaterialsDictionary[damageType].color);
-        //end = Time.time + specialDamageTakeDuration;
         end = 0;
         while (end < specialDamageTakeCount)
         {

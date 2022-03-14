@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour, IBullet, IPauseHandler
     [SerializeField] protected float lifeTime = 5f;
     [SerializeField] protected PooledObjectTag objectTag;
     [SerializeField] public DamageType damageType;
+    //[SerializeField] protected ParticleSystem onHitParticles;
 
     [HideInInspector] public string parentTag;
 

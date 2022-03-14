@@ -19,9 +19,6 @@ public class SlowMotion : Perk, IPauseHandler
     private void Start()
     {
         actionProgress = maxValue;
-        //PauseMenu.OnPause += PauseMenu_OnPause;
-        //PauseMenu.OnResume += PauseMenu_OnResume;
-
         GameManager.Instance.PauseManager.Subscribe(this);
     }
 
