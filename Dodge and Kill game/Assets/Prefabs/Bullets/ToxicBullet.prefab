@@ -160,11 +160,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89257b07594be7248932b3aae9f03b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 35
+  speed: 40
   rb: {fileID: 5757995116570480146}
   contactDamage: 6
   specialDamage: 0.09
   lifeTime: 5
   objectTag: 2
   damageType: 2
+  onHitParticlesPrefab: {fileID: 1717624676995639898, guid: ac0f1a5b932c1534f9196a00025afb86, type: 3}
   parentTag: 

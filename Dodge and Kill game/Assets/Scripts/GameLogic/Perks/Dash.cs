@@ -10,26 +10,21 @@ public class Dash : Perk
     [SerializeField] float dashForce = 10f;
     [SerializeField] float maxDash = 1f;
 
-    [SerializeField] ParticleSystem dashParticles;
+    [SerializeField] ParticleSystem dashParticlesPrefab;
     Quaternion particlesRotation = Quaternion.identity;
+    ParticleSystem dashParticles;
 
     bool readyForDash = true;
     public bool isDashing;
     float dash;
-
-    public override void Action()
-    {
-        if (readyForDash && player.moveDelta.magnitude > 0)
-        {
-            StartCoroutine(Dashing());
-        }
-    }
 
     private void Start()
     {
         isDashing = false;
         dash = maxDash;
         perkBar.SetMaxValue(maxDash);
+
+        dashParticles = Instantiate(dashParticlesPrefab, player.transform);
     }
 
     private void Update()
@@ -37,10 +32,17 @@ public class Dash : Perk
         perkBar.SetValue(dash);
     }
 
-    
     void LateUpdate()
     {
         dashParticles.transform.rotation = particlesRotation;
+    }
+
+    public override void Action()
+    {
+        if (readyForDash && player.moveDelta.magnitude > 0)
+        {
+            StartCoroutine(Dashing());
+        }
     }
 
     private IEnumerator Dashing()
@@ -54,7 +56,7 @@ public class Dash : Perk
 
         dashParticles.Play();
 
-        StartCoroutine(GameManager.ChangeValueSmoothly(res => dash = res, dash, 0, duration / 2));//change dash ui to 0 smoothly
+        StartCoroutine(GameManager.ChangeValueSmoothly(res => dash = res, dash, 0, duration));//change dash ui to 0 smoothly
         yield return new WaitForSeconds(duration);
 
         StartCoroutine(GameManager.ChangeValueSmoothly(res => player.speed = res, player.speed, player.speed - dashForce, duration)); // change speed back to normal smoothly

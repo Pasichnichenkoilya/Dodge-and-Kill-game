@@ -22,9 +22,9 @@ public class MeleeWeapon : Weapon, IPauseHandler
 
     public override void Shoot()
     {
-        if (!readyForShoot) return;
+        if (!readyForShoot)
+            return;
 
-        Debug.Log("Shoot spear");
         animator.SetTrigger("Attack");
 
         base.Shoot();
@@ -41,7 +41,6 @@ public class MeleeWeapon : Weapon, IPauseHandler
                 healthObj.TakeDamage(damageType, specialDamage);
             }
         }
-        Debug.Log("ApplyDamage");
     }
 
     private void OnDrawGizmos()

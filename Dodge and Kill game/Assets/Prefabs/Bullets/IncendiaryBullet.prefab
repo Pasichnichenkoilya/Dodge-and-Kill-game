@@ -62,13 +62,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89257b07594be7248932b3aae9f03b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 35
   rb: {fileID: 1102484499217743984}
   contactDamage: 7
   specialDamage: 0.07
   lifeTime: 5
   objectTag: 1
   damageType: 1
+  onHitParticlesPrefab: {fileID: 1717624676995639898, guid: ac0f1a5b932c1534f9196a00025afb86, type: 3}
   parentTag: 
 --- !u!1 &9079377787538753014
 GameObject:

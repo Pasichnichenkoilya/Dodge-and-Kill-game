@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, IBullet, IPauseHandler
+public class Bullet : MonoBehaviour, IBullet, IPauseHandler, IPooledItem
 {
     [SerializeField] protected float speed = 10f;
     [SerializeField] protected Rigidbody rb;
@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour, IBullet, IPauseHandler
     [SerializeField] protected float lifeTime = 5f;
     [SerializeField] protected PooledObjectTag objectTag;
     [SerializeField] public DamageType damageType;
-    //[SerializeField] protected ParticleSystem onHitParticles;
+    [SerializeField] protected ParticleSystem onHitParticlesPrefab;
 
     [HideInInspector] public string parentTag;
 
@@ -33,14 +33,13 @@ public class Bullet : MonoBehaviour, IBullet, IPauseHandler
         tmpVelocity = rb.velocity;
 
         LifeTime();
-        
     }
 
     private void LifeTime()
     {
         StartCoroutine(GameManager.WaitAndAction(
             lifeTime,
-            () => GameManager.Instance.poolDictionary[objectTag].Release(gameObject)
+            () => Release()
             ));
     }
 
@@ -51,12 +50,20 @@ public class Bullet : MonoBehaviour, IBullet, IPauseHandler
             healthObj.TakeDamage(DamageType.ContactDamage, contactDamage);
             healthObj.TakeDamage(damageType, specialDamage);
 
-            GameManager.Instance.poolDictionary[objectTag].Release(gameObject);
+            var particles = Instantiate(onHitParticlesPrefab, healthObj.transform);
+            particles.startColor = GameManager.Instance.damageMaterialsDictionary[damageType].color;
+
+            Release();
         }
     }
 
     public void SetPaused(bool isPaused)
     {
         rb.velocity = isPaused ? Vector3.zero : tmpVelocity;
+    }
+
+    public void Release()
+    {
+        GameManager.Instance.poolDictionary[objectTag].Release(gameObject);
     }
 }

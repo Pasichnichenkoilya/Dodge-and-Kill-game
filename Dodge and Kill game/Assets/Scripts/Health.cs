@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     [SerializeField] float maxHealth = 100;
     [SerializeField] HealthBar healthBar;
     [SerializeField] bool godMode = false;
+    [SerializeField] ParticleSystem onDestroyParticles;
+    [SerializeField] Material onDestroyParticlesMaterial;
 
     float health;
     float end;
@@ -24,6 +26,11 @@ public class Health : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         end = 0;
         isTakingSpecialDamage = false;
+
+        if (onDestroyParticlesMaterial == null)
+        {
+            onDestroyParticlesMaterial = gameObject.GetComponent<Material>();
+        }
     }
 
     public void TakeDamage(DamageType damageType, float damage)
@@ -60,6 +67,8 @@ public class Health : MonoBehaviour
         {
             GameManager.Instance.PauseManager.Unsubscribe(handler);
         }
+        var particles = Instantiate(onDestroyParticles, transform.position, transform.rotation);
+        particles.startColor = onDestroyParticlesMaterial.color;
         Destroy(gameObject);
     }
 

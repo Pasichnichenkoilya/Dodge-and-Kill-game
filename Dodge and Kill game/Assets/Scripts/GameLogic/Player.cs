@@ -3,7 +3,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IPauseHandler
+public class Player : MonoBehaviour, IPauseHandler, IMoving
 {
     public float speed = 5f;
 
@@ -11,8 +11,9 @@ public class Player : MonoBehaviour, IPauseHandler
     public Weapon weapon;
     public Perk perk;
 
-    [HideInInspector]
-    public Vector3 moveDelta;
+    [HideInInspector] public Vector3 moveDelta;
+
+    [SerializeField] GameObject walkingParticles;
 
     Vector3 tmpVelocity;
 
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour, IPauseHandler
         if (weapon != null)
             weapon.parentTag = gameObject.tag.ToString();
 
+        Instantiate(walkingParticles, transform);
     }
 
     void Update()

@@ -184,6 +184,8 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 7362376947098150928}
   godMode: 0
+  onDestroyParticles: {fileID: 3840216400099546332, guid: 19389fca43852364ba5616486529db74, type: 3}
+  onDestroyParticlesMaterial: {fileID: 2100000, guid: c8f001990ef5db04584af1b89c19c227, type: 2}
 --- !u!1001 &5228923222934523132
 PrefabInstance:
   m_ObjectHideFlags: 0
