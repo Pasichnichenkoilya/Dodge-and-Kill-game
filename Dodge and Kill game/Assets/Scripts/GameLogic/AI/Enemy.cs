@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IPauseHandler
 {
     [SerializeField] protected Transform target;
+    [SerializeField] protected Transform moveTarget;
     [SerializeField] protected float turnSpeed = 0.015f;
     [SerializeField] protected bool isAgro = true;
     [SerializeField] protected float movingSpeed = 5f;
@@ -13,6 +14,8 @@ public class Enemy : MonoBehaviour, IPauseHandler
     [SerializeField] protected float minDistance = 10f;
 
     [SerializeField] protected Weapon weapon;
+
+    [SerializeField] GameObject walkingParticles;
 
     Quaternion rotationGoal;
     Vector3 direction;
@@ -24,6 +27,12 @@ public class Enemy : MonoBehaviour, IPauseHandler
 
         if (weapon != null)
             weapon.parentTag = gameObject.tag.ToString();
+
+        if (walkingParticles != null)
+            Instantiate(walkingParticles, transform);
+
+        if (moveTarget == null)
+            moveTarget = target;
     }
     private void Update()
     {

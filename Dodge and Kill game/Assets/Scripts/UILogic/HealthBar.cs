@@ -13,6 +13,7 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {
         defaultColor = image.color;
+        gameObject.SetActive(false);
     }
 
     public void SetHealth(float health)
@@ -33,5 +34,10 @@ public class HealthBar : MonoBehaviour
     public void SetDefaultImageColor()
     {
         image.color = defaultColor;
+    }
+
+    public void SetVisible(bool isVisible)
+    {
+        gameObject.SetActive(isVisible);
     }
 }

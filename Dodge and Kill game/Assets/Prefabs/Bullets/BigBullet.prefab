@@ -69,6 +69,7 @@ MonoBehaviour:
   lifeTime: 5
   objectTag: 3
   damageType: 0
+  onHitParticlesPrefab: {fileID: 1717624676995639898, guid: ac0f1a5b932c1534f9196a00025afb86, type: 3}
   parentTag: 
 --- !u!1 &8834733876834372007
 GameObject:

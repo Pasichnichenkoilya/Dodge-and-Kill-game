@@ -16,9 +16,7 @@ public class Health : MonoBehaviour
     float end;
     bool isTakingSpecialDamage;
     float specialDamageTakeDuration = 3f;
-
     float specialDamageTakeCount = 0;
-    float startWaiting;
 
     private void Start()
     {
@@ -36,6 +34,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(DamageType damageType, float damage)
     {
         if (godMode) return;
+
+        healthBar.SetVisible(true);
 
         if (damageType == DamageType.ContactDamage)
         {
@@ -91,5 +91,10 @@ public class Health : MonoBehaviour
         specialDamageTakeCount = 0;
 
         isTakingSpecialDamage = false;
+    }
+
+    public void SetGodMode(bool godMode)
+    {
+        this.godMode = godMode;
     }
 }

@@ -454,6 +454,7 @@ MonoBehaviour:
   rb: {fileID: 187664961243099788}
   minDistance: 2.5
   weapon: {fileID: 187664960515178244}
+  walkingParticles: {fileID: 3376074404012088797, guid: 624c43f8493f63541b35bf2fa9d59e5a, type: 3}
 --- !u!1 &187664961712060556
 GameObject:
   m_ObjectHideFlags: 0
