@@ -64,7 +64,7 @@ Transform:
   - {fileID: 4402535754338867142}
   - {fileID: 4402535753134152903}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4402535754260091371
 Animator:
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00633f447b513394d8dc3543095e653a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: Spear
   shootingCoolDown: 0.5
   parentTag: 
   shootFrom: {fileID: 4402535753134152903}

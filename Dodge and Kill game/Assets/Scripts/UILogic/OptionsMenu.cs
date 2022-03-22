@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class OptionsMenu : MonoBehaviour
 {
     public TMP_Dropdown resolutionDropdown;
+    public TMP_Dropdown difficultyDropdown;
 
     Resolution[] resolutions;
 
@@ -24,6 +25,28 @@ public class OptionsMenu : MonoBehaviour
     public void SetResolution(int resolutionIndex)
     {
         Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height, Screen.fullScreen);
+    }
+
+    public void SetDifficulty(int index)
+    {
+        GameManager.Instance.difficulty = index + 1;
+    }
+
+    void InitDifficultyDropdown()
+    {
+        int currentResolutionIndex = 0;
+        List<string> options = new List<string>()
+        {
+            "Easy",
+            "Medium",
+            "Hard"
+        };
+
+        difficultyDropdown.ClearOptions();
+        difficultyDropdown.AddOptions(options);
+
+        difficultyDropdown.value = currentResolutionIndex;
+        difficultyDropdown.RefreshShownValue();
     }
 
     void InitResolutionDropdown()

@@ -63,7 +63,7 @@ Transform:
   - {fileID: 1713196365041991946}
   - {fileID: 1174531826956671093}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1174531827376341797
 MonoBehaviour:
@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ad74d04f0bdb45ae047da6fab6c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: ASR_15
   shootingCoolDown: 0.2
   parentTag: 
   objectTag: 2

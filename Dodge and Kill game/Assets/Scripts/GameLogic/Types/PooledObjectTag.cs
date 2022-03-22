@@ -7,5 +7,7 @@ public enum PooledObjectTag
     DefaultBullet,
     IncendiaryBullet,
     ToxicBullet,
-    BigBullet
+    BigBullet,
+    RPGRocket,
+    EnemyBullet
 }

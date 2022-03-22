@@ -258,7 +258,7 @@ Transform:
   - {fileID: 1197515212688671277}
   - {fileID: 1197515212145075963}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1197515213555378110
 MonoBehaviour:
@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ad74d04f0bdb45ae047da6fab6c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: GunThing
   shootingCoolDown: 2
   parentTag: MiniBoss
   objectTag: 3

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    public readonly string weaponName;
+
     [SerializeField] protected float shootingCoolDown; // = 0.5f
     [HideInInspector] public string parentTag;
     protected bool readyForShoot = true;

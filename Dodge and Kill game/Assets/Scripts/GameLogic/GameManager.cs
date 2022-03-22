@@ -7,7 +7,6 @@ using UnityEngine.Pool;
 
 public class GameManager : MonoBehaviour
 {
-
     private static GameManager instance;
 
     public List<Pool> pools;
@@ -16,12 +15,15 @@ public class GameManager : MonoBehaviour
     public Dictionary<PooledObjectTag, ObjectPool<GameObject>> poolDictionary;
     public Dictionary<DamageType, Material> damageMaterialsDictionary;
 
+    public Inventory Inventory { get; private set; }
 
     public PauseManager PauseManager { get; private set; }
 
     public bool IsPaused => PauseManager.IsPaused;
 
     public static GameManager Instance { get => instance; private set => instance = value; }
+
+    public int difficulty;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         InitDamageMaterials();
 
         PauseManager = new PauseManager();
+        Inventory = new Inventory();
     }
 
     void InitPools()
