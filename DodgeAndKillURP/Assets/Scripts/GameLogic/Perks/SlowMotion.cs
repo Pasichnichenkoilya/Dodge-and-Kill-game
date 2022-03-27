@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SlowMotion : Perk, IPauseHandler
 {
+    [SerializeField] PostProcessingOverride m_Override;
+
     [Range(1f, .1f)]
     [SerializeField] float slowDownFactor;
     [SerializeField] float startSlowMotionTime;
@@ -15,6 +17,8 @@ public class SlowMotion : Perk, IPauseHandler
     bool readyForAction = true;
     bool isAction = false;
     float actionProgress;
+
+    bool checkForAction = true;
 
     private void Start()
     {
@@ -39,6 +43,9 @@ public class SlowMotion : Perk, IPauseHandler
 
     public override void Action()
     {
+        if (!checkForAction)
+            return;
+
         if (readyForAction)
         {
             StopAllCoroutines();
@@ -56,6 +63,7 @@ public class SlowMotion : Perk, IPauseHandler
         readyForAction = false;
         isAction = true;
 
+        m_Override?.Apply();
         /// smoothly slowing time to slowDownFactor
         StartCoroutine(GameManager.ChangeValueSmoothly(res => Time.timeScale = res, Time.timeScale, slowDownFactor, startSlowMotionTime));
         StartCoroutine(GameManager.ChangeValueSmoothly(res => Time.fixedDeltaTime = res, Time.fixedDeltaTime, Time.timeScale * .002f, startSlowMotionTime));
@@ -74,6 +82,11 @@ public class SlowMotion : Perk, IPauseHandler
     {
         while (GameManager.Instance.PauseManager.IsPaused)
             yield return null;
+
+        m_Override?.Revert();
+
+        //checkForAction = false;
+        //GameManager.WaitAndAction(endSlowMotionTime, () => checkForAction = true);
 
         var actualCoolDown = baseCoolDown - baseCoolDown * actionProgress;// calculating cooldown with how mutch mana left
 

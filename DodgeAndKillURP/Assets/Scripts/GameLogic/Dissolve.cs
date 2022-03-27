@@ -34,8 +34,6 @@ public class Dissolve : MonoBehaviour
 
     private void EndDisolve()
     {
-        
-
         Destroy(gameObject);
     }
 
@@ -57,6 +55,4 @@ public class Dissolve : MonoBehaviour
             particles1.emission.SetBurst(0, new ParticleSystem.Burst(0, moneyDropAmount));
         }
     }
-
-
 }

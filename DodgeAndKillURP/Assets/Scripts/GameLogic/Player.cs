@@ -3,7 +3,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IPauseHandler, IMoving
+public class Player : MonoBehaviour, IPauseHandler
 {
     public float speed = 5f;
 
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour, IPauseHandler, IMoving
 
     void Update()
     {
-        if (GameManager.Instance.PauseManager.IsPaused)
+        if (GameManager.Instance.PauseManager.IsPaused || gameObject.GetComponent<Health>().IsDead)
             return;
 
         Move();

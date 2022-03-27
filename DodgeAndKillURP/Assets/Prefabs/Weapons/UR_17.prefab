@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ad74d04f0bdb45ae047da6fab6c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: UR_17
   shootingCoolDown: 0.5
   parentTag: 
   objectTag: 0

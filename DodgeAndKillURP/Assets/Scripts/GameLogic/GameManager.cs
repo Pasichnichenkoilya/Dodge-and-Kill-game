@@ -26,8 +26,23 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get => instance; private set => instance = value; }
 
+    public delegate void EventHandler(object? sender, EventArgs e);
+
+    public event EventHandler OnPlayerDie;
+
     public int difficulty;
     public ParticleSystem moneyDropParticles;
+
+    bool playerIsDead = false;
+
+    private void Update()
+    {
+        if (!playerIsDead && Player.GetComponent<Health>().IsDead)
+        {
+            playerIsDead = true;
+            OnPlayerDie?.Invoke(null, null);
+        }
+    }
 
     private void Start()
     {

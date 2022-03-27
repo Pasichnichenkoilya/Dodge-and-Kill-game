@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     [SerializeField] Dissolve dissolve;
     [SerializeField] float dissolveSpeed = 1f;
 
-    bool IsDead = false;
+    public bool IsDead = false;
 
     float health;
     float end;
