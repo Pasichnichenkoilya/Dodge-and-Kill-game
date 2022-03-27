@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
     public TMP_Dropdown resolutionDropdown;
+    public Toggle toggle;
     public TMP_Dropdown difficultyDropdown;
 
     Resolution[] resolutions;
@@ -14,16 +16,29 @@ public class OptionsMenu : MonoBehaviour
     {
         resolutions = Screen.resolutions;
         InitResolutionDropdown();
+
+        var data = SaveSystem.LoadPlayerSettings();
+        toggle.isOn = data.fullscreen;
+        SetFullscreen(data.fullscreen);
+        SetResolution(data.resolutionIndex);
     }
 
     public void SetFullscreen(bool isfullscreen)
     {
         Screen.fullScreen = isfullscreen;
+
+        var data = SaveSystem.LoadPlayerSettings();
+        data.fullscreen = isfullscreen;
+        SaveSystem.SavePlayerSettings(data);
     }
 
     public void SetResolution(int resolutionIndex)
     {
         Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height, Screen.fullScreen);
+
+        var data = SaveSystem.LoadPlayerSettings();
+        data.resolutionIndex = resolutionIndex;
+        SaveSystem.SavePlayerSettings(data);
     }
 
     public void SetDifficulty(int index)
@@ -37,18 +52,21 @@ public class OptionsMenu : MonoBehaviour
 
         int currentResolutionIndex = 0;
 
-        for (int i = resolutions.Length - 1; i >= 0; i--)
+        for (int i = 0; i < resolutions.Length; i++)
         {
             options.Add($"{resolutions[i].width} x {resolutions[i].height}");
 
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = resolutions.Length - 1 - i;
-            }
+            //if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            //{
+            //    currentResolutionIndex = i;
+            //}
         }
 
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
+
+        var data = SaveSystem.LoadPlayerSettings();
+        currentResolutionIndex = data.resolutionIndex;
 
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();

@@ -16,6 +16,8 @@ public class WaveSpawner : MonoBehaviour
         public float rate;
     }
 
+    [SerializeField] WaveInfo waveInfo;
+
     public Wave[] waves;
     private int nextWave = 0;
     public int NextWave
@@ -25,7 +27,7 @@ public class WaveSpawner : MonoBehaviour
 
     public Transform[] spawnPoints;
 
-    public float timeBetweenWaves = 5f;
+    public int timeBetweenWaves = 5;
     private float waveCountdown;
     public float WaveCountdown
     {
@@ -87,6 +89,7 @@ public class WaveSpawner : MonoBehaviour
 
         state = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
+        waveInfo.StartCountDown(timeBetweenWaves);
 
         if (nextWave + 1 > waves.Length - 1)
         {
@@ -142,6 +145,5 @@ public class WaveSpawner : MonoBehaviour
             x.GetComponent<Enemy>().moveTarget = GameManager.Instance.Player.transform;
         }
     }
-
 }
 

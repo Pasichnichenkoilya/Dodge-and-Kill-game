@@ -336,8 +336,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2037655233686215594, guid: 6be0f61d9767f9543b9606f9c4085e4c, type: 3}
+      propertyPath: TriggerModule.enter
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037655233686215594, guid: 6be0f61d9767f9543b9606f9c4085e4c, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037655233686215594, guid: 6be0f61d9767f9543b9606f9c4085e4c, type: 3}
+      propertyPath: TriggerModule.primitives.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2037655233686215594, guid: 6be0f61d9767f9543b9606f9c4085e4c, type: 3}
       propertyPath: TriggerModule.primitives.Array.data[0]
@@ -1337,7 +1345,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1033861520}
   - component: {fileID: 1033861521}
+  - component: {fileID: 1033861523}
   - component: {fileID: 1033861522}
+  - component: {fileID: 1033861524}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1399,7 +1409,7 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: ed23d8fba41a9ff439a6461e80b2c5b3, type: 2}
   - damageType: 1
     material: {fileID: 2100000, guid: 097941fdde98b4f4482464d71e5b007e, type: 2}
-  difficulty: 0
+  difficulty: 1
   moneyDropParticles: {fileID: 116379615}
 --- !u!114 &1033861522
 MonoBehaviour:
@@ -1413,6 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cb79f12f1c55046b6a06d7026d70d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveInfo: {fileID: 1033861523}
   waves:
   - name: 1
     enemy: {fileID: 6394270710059846132, guid: 9209966370fa96d43a1836e341d280b4, type: 3}
@@ -1432,6 +1443,37 @@ MonoBehaviour:
   - {fileID: 1126120747}
   - {fileID: 721568403}
   timeBetweenWaves: 5
+--- !u!114 &1033861523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033861519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f22ea48a1993d4497e7e3379bb29ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmpText: {fileID: 1831256295}
+  panel: {fileID: 1887583740}
+--- !u!114 &1033861524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033861519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d49df48bc1a32a43950390f183bbd88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2105592798}
+  activePerk: {fileID: 0}
+  perks:
+  - {fileID: 1657899400}
+  - {fileID: 2064801460}
 --- !u!1 &1040569822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1657899399
 Transform:
   m_ObjectHideFlags: 0
@@ -2832,7 +2874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1887583741
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2866,7 +2908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.98039216}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.47058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3083,11 +3125,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   perkName: SlowMotion
-  duration: 4
-  baseCoolDown: 10
+  duration: 5
+  baseCoolDown: 5
   slowDownFactor: 0.3
   startSlowMotionTime: 0.5
-  endSlowMotionTime: 0.3
+  endSlowMotionTime: 0.4
   manaBar: {fileID: 966011379}
 --- !u!4 &2105592796 stripped
 Transform:

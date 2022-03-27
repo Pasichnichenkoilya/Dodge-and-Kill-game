@@ -14,7 +14,7 @@ public class Inventory
     Dictionary<GameObject, Perk> perks;
 
     public Weapon CurrentWeapon { get => currentWeapon; private set => currentWeapon = value; }
-    public int Money { get => money; private set => money = value; }
+    public int Money { get => money; set => money = value; }
 
     public Inventory()
     {
@@ -29,7 +29,7 @@ public class Inventory
 
     public void AddMoney(int amount)
     {
-        this.Money += money;
+        this.Money += amount;
     }
 
     public bool TryRemoveMoney(int amount)

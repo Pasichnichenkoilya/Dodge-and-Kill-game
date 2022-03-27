@@ -34,15 +34,7 @@ public class Dissolve : MonoBehaviour
 
     private void EndDisolve()
     {
-        var particles = Instantiate(onDestroyVFX, transform.position, transform.rotation);
-        particles.GetComponent<VisualEffect>().SetVector4("ParticlesColor", gameObject.GetComponent<MeshRenderer>().material.GetColor("_Color"));
-        particles.GetComponent<VisualEffect>().Play();
-
-        if (moneyParticles != null)
-        {
-            var particles1 = Instantiate(moneyParticles, transform.position, transform.rotation);
-            particles1.emission.SetBurst(0, new ParticleSystem.Burst(0, moneyDropAmount));
-        }
+        
 
         Destroy(gameObject);
     }
@@ -54,6 +46,16 @@ public class Dissolve : MonoBehaviour
             item.SetActive(false);
         }
         StartCoroutine(GameManager.ChangeValueSmoothly(res => dissolveScale = res, 0, dissolveGoal, dissolveTime));
+
+        var particles = Instantiate(onDestroyVFX, transform.position, transform.rotation);
+        particles.GetComponent<VisualEffect>().SetVector4("ParticlesColor", gameObject.GetComponent<MeshRenderer>().material.GetColor("_Color"));
+        particles.GetComponent<VisualEffect>().Play();
+
+        if (moneyParticles != null)
+        {
+            var particles1 = Instantiate(moneyParticles, transform.position, transform.rotation);
+            particles1.emission.SetBurst(0, new ParticleSystem.Burst(0, moneyDropAmount));
+        }
     }
 
 

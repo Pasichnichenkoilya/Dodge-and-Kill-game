@@ -164,7 +164,7 @@ MonoBehaviour:
   moveTarget: {fileID: 0}
   autoFindTarget: 1
   targetTag: Player
-  turnSpeed: 0.05
+  turnSpeed: 0.8
   isAgro: 1
   movingSpeed: 17
   rb: {fileID: 8742094187155117941}
