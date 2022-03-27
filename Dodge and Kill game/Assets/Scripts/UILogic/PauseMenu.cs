@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        IsGamePaused = true;
+        IsGamePaused = false;
         checkForInput = true;
         GameManager.Instance.PauseManager.SetPaused(IsGamePaused);
     }

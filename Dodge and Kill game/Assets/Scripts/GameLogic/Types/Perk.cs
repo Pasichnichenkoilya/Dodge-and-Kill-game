@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Perk : MonoBehaviour
 {
+    public string perkName;
     public float duration;
     public float baseCoolDown;
 

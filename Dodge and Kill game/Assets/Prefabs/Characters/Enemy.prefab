@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50becd16d4b27a649b18b2962a3b2702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 2202519918451673505, guid: 59d186fc723323845a08ee04728cc87e, type: 3}
   moveTarget: {fileID: 0}
   turnSpeed: 0.02
   isAgro: 1

@@ -566,7 +566,7 @@ Transform:
   - {fileID: 3471249565860685725}
   - {fileID: 1110613283}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2202519918451673510
 MeshFilter:
@@ -679,11 +679,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 3471249565461266253}
-  godMode: 1
-  onDestroyParticles: {fileID: 3840216400099546338, guid: 19389fca43852364ba5616486529db74, type: 3}
-  moneyDropAmount: 10
-  moneyParticles: {fileID: 0}
-  onDestroyParticlesMaterial: {fileID: 0}
+  godMode: 0
+  onDestroyParticles: {fileID: 3840216400099546332, guid: 19389fca43852364ba5616486529db74, type: 3}
+  moneyDropAmount: 0
+  moneyParticles: {fileID: 2437543382789128608, guid: d1ad088e1fad82c44875af7122d3dc34, type: 3}
+  onDestroyParticlesMaterial: {fileID: 2100000, guid: 16ea135827b2a62449b7899c24563ec1, type: 2}
 --- !u!114 &2202519918718275079
 MonoBehaviour:
   m_ObjectHideFlags: 0

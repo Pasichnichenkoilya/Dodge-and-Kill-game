@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00633f447b513394d8dc3543095e653a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: Spear
   shootingCoolDown: 0.5
   parentTag: 
   shootFrom: {fileID: 4402535753134152903}

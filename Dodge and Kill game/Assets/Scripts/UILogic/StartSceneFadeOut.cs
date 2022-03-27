@@ -7,6 +7,7 @@ using UnityEngine;
 public class StartSceneFadeOut : MonoBehaviour
 {
     [SerializeField] TMP_Text tmpText;
+    [SerializeField] int countTime = 3;
 
     void Start()
     {
@@ -16,12 +17,14 @@ public class StartSceneFadeOut : MonoBehaviour
 
     private IEnumerator Counter()
     {
-        for (int i = 3; i > 0; i--)
+        for (int i = countTime; i > 0; i--)
         {
             tmpText.text = i.ToString();
             yield return new WaitForSecondsRealtime(.7f);
         }
         PauseMenu.Instance.Resume();
         gameObject.SetActive(false);
+
+        yield break;
     }
 }

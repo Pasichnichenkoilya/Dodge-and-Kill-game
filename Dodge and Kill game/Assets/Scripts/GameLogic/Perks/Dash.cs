@@ -34,6 +34,8 @@ public class Dash : Perk
 
     void LateUpdate()
     {
+        if (dashParticles == null)
+            return;
         dashParticles.transform.rotation = particlesRotation;
     }
 

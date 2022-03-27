@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IPauseHandler
 {
-    [SerializeField] protected Transform target;
-    [SerializeField] protected Transform moveTarget;
+    [SerializeField] public Transform target;
+    [SerializeField] public Transform moveTarget;
     [SerializeField] protected float turnSpeed = 0.015f;
     [SerializeField] protected bool isAgro = true;
     [SerializeField] protected float movingSpeed = 5f;

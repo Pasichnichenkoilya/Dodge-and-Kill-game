@@ -17,13 +17,20 @@ public class GameManager : MonoBehaviour
 
     public Inventory Inventory { get; private set; }
 
-    public PauseManager PauseManager { get; private set; }
+    public Player Player { get; private set; }
 
+    public PauseManager PauseManager { get; private set; }
+    public PerkManager PerkManager { get; private set; }
     public bool IsPaused => PauseManager.IsPaused;
 
     public static GameManager Instance { get => instance; private set => instance = value; }
 
     public int difficulty;
+
+    private void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     private void Awake()
     {
@@ -35,6 +42,7 @@ public class GameManager : MonoBehaviour
 
         PauseManager = new PauseManager();
         Inventory = new Inventory();
+        PerkManager = new PerkManager();
     }
 
     void InitPools()
