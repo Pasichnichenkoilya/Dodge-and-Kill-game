@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
 
             poolDictionary.Add(p.tag, objectPool);
         }
+
     }
 
     void InitDamageMaterials()
