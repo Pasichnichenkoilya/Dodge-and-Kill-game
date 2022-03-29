@@ -63,12 +63,14 @@ public class PauseMenu : MonoBehaviour
     {
         GameManager.Instance.PauseManager.SetPaused(false);
         checkForInput = false;
+        SaveSystem.SavePlayerProgress();
 
         SceneManager.LoadScene("MenuMain");
     }
 
     public void Quit()
     {
+        SaveSystem.SavePlayerProgress();
         Application.Quit();
     }
 }

@@ -19,6 +19,7 @@ public class GameOver : MonoBehaviour
 
     public void RetryClick()
     {
+        SaveSystem.SavePlayerProgress();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

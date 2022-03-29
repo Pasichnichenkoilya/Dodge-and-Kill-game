@@ -21,8 +21,12 @@ public class GameManager : MonoBehaviour
     public PauseManager PauseManager { get; private set; }
 
     public PerkManager PerkManager { get; private set; }
+    public WeaponManager WeaponManager { get; private set; }
 
     public bool IsPaused => PauseManager.IsPaused;
+
+    public Weapon ActiveWeapon => WeaponManager.activeWeapon;
+
 
     public static GameManager Instance { get => instance; private set => instance = value; }
 
@@ -52,9 +56,20 @@ public class GameManager : MonoBehaviour
 
     public void LoadPlayerProgress(PlayerProgress playerProgress)
     {
-        PerkManager.SetActivePerk(playerProgress.perkName);
-        Inventory.Money = playerProgress.money;
-        //WeaponManager.SetActiveWeapon(playerProgress.weaponName);
+        if (playerProgress != null)
+        {
+            PerkManager.SetActivePerk(playerProgress.perkName);
+            Inventory.Money = playerProgress.money;
+            WeaponManager.SetActiveWeapon(playerProgress.weaponName);
+            WeaponManager.SetBullet(playerProgress.weaponName, playerProgress.bulletType);
+
+            return;
+        }
+
+        PerkManager.SetActivePerk(0);
+        Inventory.Money = 0;
+        WeaponManager.SetActiveWeapon(WeaponManager.weapons[0].name);
+        WeaponManager.SetBullet(WeaponManager.weapons[0].name, PooledObjectTag.DefaultBullet);
     }
 
     private void Awake()
@@ -68,6 +83,7 @@ public class GameManager : MonoBehaviour
         PauseManager = new PauseManager();
         Inventory = new Inventory();
         PerkManager = gameObject.GetComponent<PerkManager>();
+        WeaponManager = gameObject.GetComponent<WeaponManager>();
     }
 
     void InitPools()

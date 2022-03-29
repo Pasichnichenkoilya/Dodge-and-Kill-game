@@ -6,19 +6,23 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-   
     public static void SavePlayerProgress(PlayerProgress playerProgress = null, string fileName = "PlayerProgress.dat")
     {
         BinaryFormatter formatter = new BinaryFormatter();
+        bool autosave = playerProgress == null;
+
+        if (autosave)
+        {
+            playerProgress = LoadPlayerProgress();
+            playerProgress.money = GameManager.Instance.Inventory.Money;
+        }
 
         using (FileStream fs = new FileStream($"{Application.persistentDataPath}/{fileName}", FileMode.Create))
         {
-            if (playerProgress == null)
-                playerProgress = new PlayerProgress(GameManager.Instance.Inventory.Money, GameManager.Instance.PerkManager.activePerk.perkName, "testWeaponName");
-
             formatter.Serialize(fs, playerProgress);
         }
     }
+
     public static PlayerProgress LoadPlayerProgress(string fileName = "PlayerProgress.dat")
     {
         string path = $"{Application.persistentDataPath}/{fileName}";
@@ -29,10 +33,11 @@ public static class SaveSystem
             using (FileStream fileStream = new FileStream(path, FileMode.Open))
             {
                 data = binaryFormatter.Deserialize(fileStream) as PlayerProgress;
+                return data;
             }
         }
 
-        return data;
+        return new PlayerProgress();
     }
 
     public static void SavePlayerSettings(PlayerSettings playerSettings, string fileName = "PlayerSettings.dat")
@@ -55,19 +60,35 @@ public static class SaveSystem
             using (FileStream fileStream = new FileStream(path, FileMode.Open))
             {
                 data = binaryFormatter.Deserialize(fileStream) as PlayerSettings;
+                return data;
             }
         }
 
-        return data;
+        return new PlayerSettings();
     }
-
 }
 
 [System.Serializable]
 public class PlayerSettings
 {
-    public bool fullscreen = false;
-    public int resolutionIndex = 0;
+    public bool fullscreen;
+    public int resolutionIndex;
+
+    public PlayerSettings() // default values
+    {
+        var resolutions = Screen.resolutions;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            {
+                resolutionIndex = i;
+                break;
+            }
+        }
+
+        fullscreen = false;
+    }
 }
 
 [System.Serializable]
@@ -76,11 +97,13 @@ public class PlayerProgress
     public int money;
     public string perkName;
     public string weaponName;
+    public PooledObjectTag bulletType;
 
-    public PlayerProgress(int money, string perkName, string weaponName)
+    public PlayerProgress() // default values
     {
-        this.money = money;
-        this.perkName = perkName;
-        this.weaponName = weaponName;
+        money = 0;
+        perkName = "Dash";
+        weaponName = "UR_17";
+        bulletType = PooledObjectTag.DefaultBullet;
     }
 }

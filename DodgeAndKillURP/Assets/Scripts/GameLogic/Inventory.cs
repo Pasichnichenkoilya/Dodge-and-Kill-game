@@ -23,8 +23,6 @@ public class Inventory
         perks = new Dictionary<GameObject, Perk>();
 
         Money = 0;
-
-        //LoadInventory(); // load inventory from db
     }
 
     public void AddMoney(int amount)

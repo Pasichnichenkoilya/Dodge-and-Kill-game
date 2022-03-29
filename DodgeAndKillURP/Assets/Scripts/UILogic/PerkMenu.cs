@@ -4,11 +4,14 @@ using TMPro;
 using UnityEngine;
 public class PerkMenu : MonoBehaviour
 {
-    [SerializeField] TMP_Text selectedText;
+    [SerializeField] TMP_Text selectedPerkText;
+    [SerializeField] TMP_Text moneyText;
 
     private void Start()
     {
         var data = SaveSystem.LoadPlayerProgress();
+        moneyText.text = $"Money: {data.money}";
+
         SetPerk(data.perkName);
     }
 
@@ -18,6 +21,6 @@ public class PerkMenu : MonoBehaviour
         data.perkName = perkName;
 
         SaveSystem.SavePlayerProgress(data);
-        selectedText.text = $"Selected: {perkName}";
+        selectedPerkText.text = $"Selected perk: {perkName}";
     }
 }

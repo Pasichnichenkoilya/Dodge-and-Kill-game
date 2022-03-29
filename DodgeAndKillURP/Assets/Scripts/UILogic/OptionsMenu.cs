@@ -18,7 +18,9 @@ public class OptionsMenu : MonoBehaviour
         InitResolutionDropdown();
 
         var data = SaveSystem.LoadPlayerSettings();
+
         toggle.isOn = data.fullscreen;
+
         SetFullscreen(data.fullscreen);
         SetResolution(data.resolutionIndex);
     }
@@ -30,6 +32,8 @@ public class OptionsMenu : MonoBehaviour
         var data = SaveSystem.LoadPlayerSettings();
         data.fullscreen = isfullscreen;
         SaveSystem.SavePlayerSettings(data);
+
+        Debug.Log($"Fullscreen set {isfullscreen}");
     }
 
     public void SetResolution(int resolutionIndex)
@@ -39,6 +43,8 @@ public class OptionsMenu : MonoBehaviour
         var data = SaveSystem.LoadPlayerSettings();
         data.resolutionIndex = resolutionIndex;
         SaveSystem.SavePlayerSettings(data);
+
+        Debug.Log($"Resolution set {resolutionIndex}");
     }
 
     public void SetDifficulty(int index)

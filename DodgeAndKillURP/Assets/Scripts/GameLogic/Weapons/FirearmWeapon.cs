@@ -5,7 +5,7 @@ using UnityEngine;
 public class FirearmWeapon : Weapon
 {
 
-    [SerializeField] PooledObjectTag objectTag;
+    public PooledObjectTag objectTag;
     [SerializeField] Transform shootFrom;
 
     public override void Shoot()
