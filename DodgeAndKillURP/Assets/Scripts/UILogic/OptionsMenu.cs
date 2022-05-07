@@ -32,8 +32,6 @@ public class OptionsMenu : MonoBehaviour
         var data = SaveSystem.LoadPlayerSettings();
         data.fullscreen = isfullscreen;
         SaveSystem.SavePlayerSettings(data);
-
-        Debug.Log($"Fullscreen set {isfullscreen}");
     }
 
     public void SetResolution(int resolutionIndex)

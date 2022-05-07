@@ -17,7 +17,6 @@ public class Health : MonoBehaviour
     Material damageMaterial;
 
     [SerializeField] Dissolve dissolve;
-    [SerializeField] float dissolveSpeed = 1f;
 
     public bool IsDead = false;
 

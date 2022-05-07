@@ -29,9 +29,9 @@ public class Enemy : MonoBehaviour, IPauseHandler
 
         if (autoFindTarget && GameManager.Instance.Player != null)
         {
-            var player = GameManager.Instance.Player;
-            target = player.transform;
-            moveTarget = player.transform;
+            var player = GameManager.Instance.Player.transform;
+            target = player;
+            moveTarget = player;
         }
 
         if (weapon != null)
@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour, IPauseHandler
         if (moveTarget == null)
             moveTarget = target;
     }
+
     private void Update()
     {
         if (GameManager.Instance.PauseManager.IsPaused)

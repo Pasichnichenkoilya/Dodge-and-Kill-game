@@ -40,7 +40,7 @@ ParticleSystemForceField:
   m_GameObject: {fileID: 114164380}
   m_Enabled: 1
   m_Parameters:
-    m_Shape: 0
+    m_Shape: 3
     m_StartRange: 0
     m_EndRange: 5
     m_Length: 1
@@ -208,7 +208,7 @@ ParticleSystemForceField:
     m_GravityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 10
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -314,7 +314,7 @@ ParticleSystemForceField:
     m_RotationAttractionCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -322,21 +322,21 @@ ParticleSystemForceField:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -524,8 +524,8 @@ ParticleSystemForceField:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_MultiplyDragByParticleSize: 1
-    m_MultiplyDragByParticleVelocity: 1
+    m_MultiplyDragByParticleSize: 0
+    m_MultiplyDragByParticleVelocity: 0
 --- !u!1 &367320968413716634
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21944214413c46c4687a9a7e83962992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 150
   healthBar: {fileID: 8129139442541996738}
   godMode: 0
   moneyParticles: {fileID: 0}
@@ -741,7 +741,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5950364400019322442}
   m_Father: {fileID: 367320968413716638}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -875,3 +876,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6789c1df2468ff4fac0ba547b3f313b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &367320970434158137
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 367320969145031387}
+    m_Modifications:
+    - target: {fileID: 5765088979149049759, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: objectTag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765088979149049759, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: shootingCoolDown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683583947223331529, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_Name
+      value: ASR_15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6683583947223331529, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+--- !u!4 &5950364400019322442 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6308149570472749171, guid: 1db2fcdad312f5a4b8286bb5e1180001, type: 3}
+  m_PrefabInstance: {fileID: 367320970434158137}
+  m_PrefabAsset: {fileID: 0}

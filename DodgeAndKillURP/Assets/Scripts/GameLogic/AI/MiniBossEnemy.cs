@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MiniBossEnemy : Enemy
 {
-    [SerializeField] GameObject minions;
-    [SerializeField] Health health;
-
     protected override void Logic()
     {
         if (!isAgro || target == null)

@@ -15,29 +15,41 @@ public class GameManager : MonoBehaviour
     public Dictionary<DamageType, Material> damageMaterialsDictionary;
 
     public Inventory Inventory { get; private set; }
-
     public Player Player { get; private set; }
-
     public PauseManager PauseManager { get; private set; }
-
     public PerkManager PerkManager { get; private set; }
     public WeaponManager WeaponManager { get; private set; }
-
     public bool IsPaused => PauseManager.IsPaused;
-
     public Weapon ActiveWeapon => WeaponManager.activeWeapon;
-
-
     public static GameManager Instance { get => instance; private set => instance = value; }
-
     public delegate void EventHandler(object? sender, EventArgs e);
-
     public event EventHandler OnPlayerDie;
-
     public int difficulty;
     public ParticleSystem moneyDropParticles;
 
     bool playerIsDead = false;
+
+    private void Awake()
+    {
+        if (instance != null) return;
+        instance = this;
+
+        InitPools();
+        InitDamageMaterials();
+
+        PauseManager = new PauseManager();
+        Inventory = new Inventory();
+        PerkManager = gameObject.GetComponent<PerkManager>();
+        WeaponManager = gameObject.GetComponent<WeaponManager>();
+
+        if (Player == null)
+            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        LoadPlayerProgress(SaveSystem.LoadPlayerProgress());
+    }
 
     private void Update()
     {
@@ -46,12 +58,6 @@ public class GameManager : MonoBehaviour
             playerIsDead = true;
             OnPlayerDie?.Invoke(null, null);
         }
-    }
-
-    private void Start()
-    {
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        LoadPlayerProgress(SaveSystem.LoadPlayerProgress());
     }
 
     public void LoadPlayerProgress(PlayerProgress playerProgress)
@@ -70,20 +76,6 @@ public class GameManager : MonoBehaviour
         Inventory.Money = 0;
         WeaponManager.SetActiveWeapon(WeaponManager.weapons[0].name);
         WeaponManager.SetBullet(WeaponManager.weapons[0].name, PooledObjectTag.DefaultBullet);
-    }
-
-    private void Awake()
-    {
-        if (instance != null) return;
-        instance = this;
-
-        InitPools();
-        InitDamageMaterials();
-
-        PauseManager = new PauseManager();
-        Inventory = new Inventory();
-        PerkManager = gameObject.GetComponent<PerkManager>();
-        WeaponManager = gameObject.GetComponent<WeaponManager>();
     }
 
     void InitPools()
