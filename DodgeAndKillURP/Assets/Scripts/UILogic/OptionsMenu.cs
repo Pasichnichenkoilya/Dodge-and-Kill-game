@@ -42,7 +42,7 @@ public class OptionsMenu : MonoBehaviour
         data.resolutionIndex = resolutionIndex;
         SaveSystem.SavePlayerSettings(data);
 
-        Debug.Log($"Resolution set {resolutionIndex}");
+        //Debug.Log($"Resolution set {resolutionIndex}");
     }
 
     public void SetDifficulty(int index)
